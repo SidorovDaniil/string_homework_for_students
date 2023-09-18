@@ -25,6 +25,7 @@
 pytest ./4_safe_text/text.py
 """
 import os
+import re
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SPLIT_SYMBOL = '.\n'
@@ -47,5 +48,17 @@ def get_wrong_article() -> str:
 def recover_article() -> str:
     wrong_article = get_wrong_article()
 
+    wrong_article = re.sub(r'!', '', wrong_article).lower()
+    wrong_article = wrong_article.split(SPLIT_SYMBOL)
+
+    for j in range(len(wrong_article)):
+        wrong_article[j] = wrong_article[j][::-1]
+        wrong_article[j] = wrong_article[j].replace('woof-woof', 'cat')
+        wrong_article[j] = wrong_article[j].capitalize()
+
+    wrong_article = SPLIT_SYMBOL.join(wrong_article)
+    print(wrong_article)
     # Ваш код ниже, возвращайте уже отредактированный текст!
     return wrong_article
+
+recover_article()

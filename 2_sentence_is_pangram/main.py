@@ -9,4 +9,8 @@ pytest ./2_sentence_is_pangram/test.py
 
 
 def is_sentence_is_pangram(sentence: str) -> bool:
-    """Пишите ваш код здесь."""
+    answer = False
+    if len(set(sentence.lower())) == 26:
+        answer = True
+
+    return answer
